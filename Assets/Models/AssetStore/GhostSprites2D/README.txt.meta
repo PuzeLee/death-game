@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a936a604f4014ee4a90110f61048f67a
+timeCreated: 1439173658
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 40357
+  packageName: Ghost Sprites 2D
+  packageVersion: 1.2
+  assetPath: Assets/GhostSprites2D/README.txt
+  uploadId: 92985

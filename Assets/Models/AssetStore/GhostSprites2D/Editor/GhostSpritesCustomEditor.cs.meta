@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 5217583b39bbfa94ab706bbb63a9a297
+timeCreated: 1439168506
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 40357
+  packageName: Ghost Sprites 2D
+  packageVersion: 1.2
+  assetPath: Assets/GhostSprites2D/Editor/GhostSpritesCustomEditor.cs
+  uploadId: 92985

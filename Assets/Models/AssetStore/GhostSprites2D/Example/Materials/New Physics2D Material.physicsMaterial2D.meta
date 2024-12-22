@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: afc1c7f541dcd4447999744bce3a325a
+timeCreated: 1434947323
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 40357
+  packageName: Ghost Sprites 2D
+  packageVersion: 1.2
+  assetPath: Assets/GhostSprites2D/Example/Materials/New Physics2D Material.physicsMaterial2D
+  uploadId: 92985

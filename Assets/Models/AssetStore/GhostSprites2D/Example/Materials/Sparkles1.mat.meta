@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 54a25083388dcac4986eb68330795931
+timeCreated: 1436838568
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 40357
+  packageName: Ghost Sprites 2D
+  packageVersion: 1.2
+  assetPath: Assets/GhostSprites2D/Example/Materials/Sparkles1.mat
+  uploadId: 92985

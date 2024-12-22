@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: f2251b651ddeed2489815f26b026e905
+timeCreated: 1435445094
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 40357
+  packageName: Ghost Sprites 2D
+  packageVersion: 1.2
+  assetPath: Assets/GhostSprites2D/Scripts/GhostSprites/GhostSprites.cs
+  uploadId: 92985

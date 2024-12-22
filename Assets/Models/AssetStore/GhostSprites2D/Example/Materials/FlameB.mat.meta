@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7c195886e47b4fb44a5d148067834ebb
+timeCreated: 1436838547
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 40357
+  packageName: Ghost Sprites 2D
+  packageVersion: 1.2
+  assetPath: Assets/GhostSprites2D/Example/Materials/FlameB.mat
+  uploadId: 92985

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fc3c194b88ef06e4181ff661ecf59412
+timeCreated: 1434945880
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 40357
+  packageName: Ghost Sprites 2D
+  packageVersion: 1.2
+  assetPath: Assets/GhostSprites2D/Example/Prefabs/Ground_block_001_Flat_(800) lines.prefab
+  uploadId: 92985
