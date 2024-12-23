@@ -389,7 +389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Right Button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 571fd6185ab03b64ca97aae14dca650f, type: 2}
   m_sharedMaterial: {fileID: 8876610678583588239, guid: 571fd6185ab03b64ca97aae14dca650f, type: 2}
@@ -529,7 +529,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &436897086
+--- !u!43 &505928603
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -694,7 +694,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!43 &505928603
+--- !u!43 &523277131
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1556,7 +1556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Left Button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 571fd6185ab03b64ca97aae14dca650f, type: 2}
   m_sharedMaterial: {fileID: 8876610678583588239, guid: 571fd6185ab03b64ca97aae14dca650f, type: 2}
@@ -1649,7 +1649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3570782826770991282, guid: 158daf93e359d994bbb1f1953224231b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3570782826770991282, guid: 158daf93e359d994bbb1f1953224231b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1942,7 +1942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1212428160317591807, guid: 9ff152082ad9eb74e918623d05e8612a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1212428160317591807, guid: 9ff152082ad9eb74e918623d05e8612a, type: 3}
       propertyPath: m_LocalPosition.z
