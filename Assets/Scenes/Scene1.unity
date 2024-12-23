@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 80799526}
   - component: {fileID: 80799527}
   - component: {fileID: 80799528}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,12 +610,12 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 1.3165498
   m_LinearDamping: 0
   m_AngularDamping: 0
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 2.5
+  m_Material: {fileID: 6200000, guid: d98b3177ae46b0649819e164110f4a7d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -672,6 +672,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.2831889, y: 4.103994}
   m_EdgeRadius: 0
+--- !u!114 &1156497498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156497493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42a701c3673a4940a4a23acc77895ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 5
+  _jumpPower: 8
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1632281844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -876,6 +893,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2053518115102101880, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1156497496}
+    - targetCorrespondingSourceObject: {fileID: 2053518115102101880, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1156497498}
   m_SourcePrefab: {fileID: 100100000, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
