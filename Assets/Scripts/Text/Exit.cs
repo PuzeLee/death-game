@@ -1,5 +1,3 @@
-using UnityEngine;
-
 /// <summary>
 /// Exit is Serialized as a data class
 /// </summary>

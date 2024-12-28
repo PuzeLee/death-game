@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class IgnoreCollision : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+	[SerializeField]
+	Collider2D thisCollider;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	[SerializeField]
+	Collider2D[] colliderToIgnore;
+
+	private void Start()
+	{
+		foreach (Collider2D otherCollider in colliderToIgnore)
+		{
+			Physics2D.IgnoreCollision(thisCollider, otherCollider, true);
+		}
+	}
 }
