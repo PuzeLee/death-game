@@ -2,48 +2,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Controll the paragraphs
+/// </summary>
+
 public class ParagraphController : MonoBehaviour
 {
-	public TextMeshProUGUI _displayText;
-	[HideInInspector] public ParagraphNavigation _paragraphNavigation;
-	[HideInInspector] public List<string> _interactionDescriptionInParagraph = new List<string>();
+    public TextMeshProUGUI _displayText;
+    public TextMeshProUGUI[] _buttonText;
+    public Paragraph _currentParagraph;
+    private Dictionary<string, Paragraph> _exitDictionary = new Dictionary<string, Paragraph>();
+    // [HideInInspector] public List<string> _exitsDescriptionInParagraph = new List<string>();
 
-	private List<string> _actionLog = new List<string>();
+    private void Awake()
+    {
 
-	private void Awake()
-	{
-		_paragraphNavigation = GetComponent<ParagraphNavigation>();
-	}
+    }
 
-	private void Start()
-	{
-		DisplayParagraphText();
-		DisplayLoggedText();
-	}
+    private void Start()
+    {
+        DisplayParagraphText();
+    }
 
-	public void DisplayLoggedText()
-	{
-		string logAsText = string.Join("\n", _actionLog.ToArray());
-		_displayText.text = logAsText;
-	}
+    public void DisplayParagraphText()
+    {
+        UnpackDescription();    // get paragraph descriptions & display
+        UnpackExits();          // get exit descriptions & display at buttons
+    }
 
-	public void DisplayParagraphText()
-	{
-		UnpackParagraph();
+    public void UnpackDescription()
+    {
+        string combinedText = _currentParagraph._description + "\n";
+        _displayText.text = combinedText;
+    }
 
-		string joinedInteractionDescriptions = string.Join("\n", _interactionDescriptionInParagraph.ToArray());
+    public void UnpackExits()
+    {
+        if (_currentParagraph._exits.Length == 1)
+        {
+            _buttonText[1].text = _currentParagraph._exits[0]._exitDescription;
+        }
+        else if (_currentParagraph._exits.Length == 2)
+        {
+            _buttonText[0].text = _currentParagraph._exits[0]._exitDescription;
+            _buttonText[1].text = _currentParagraph._exits[1]._exitDescription;
+        }
 
-		string combinedText = _paragraphNavigation._currentParagraph._description + "\n" + joinedInteractionDescriptions;
-		LogStringWithReturn(combinedText);
-	}
+        for (int i = 0; i < _currentParagraph._exits.Length; i++)
+        {
+            _exitDictionary.Add(_currentParagraph._exits[i]._exitDescription, _currentParagraph._exits[i]._moveToParagraph);
+        }
+    }
 
-	private void UnpackParagraph()
-	{
-		_paragraphNavigation.UnpackExitsInParagraph();
-	}
+    public void ClickButton()
+    {
+        // change paragraph
+        if (_currentParagraph._exits.Length == 1)
+        {
+            _currentParagraph = _currentParagraph._exits[0]._moveToParagraph;
+        }
+        else if (_currentParagraph._exits.Length == 2)
+        {
+            _currentParagraph = _currentParagraph._exits[0]._moveToParagraph;
 
-	public void LogStringWithReturn(string stringToAdd)
-	{
-		_actionLog.Add(stringToAdd + "\n");
-	}
+        }
+        // _currentParagraph = _exitDictionary[directionNoun];
+    }
 }

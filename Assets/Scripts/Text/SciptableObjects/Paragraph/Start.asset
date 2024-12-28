@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7be9792f57748a4e99663f4a3f46a5a, type: 3}
-  m_Name: StartParagraph
+  m_Name: Start
   m_EditorClassIdentifier: 
   _description: Welcome to the Death Game.
   _paragraphName: Start Paragraph
   _exits:
-  - _keyString: Go Left
-    _exitDescription: You can go left.(Exit Description)
-    _valueParagraph: {fileID: 11400000, guid: 3b39800efc077d04798aa0c720809018, type: 2}
+  - _exitDescription: You can go left.(Exit Description)
+    _moveToParagraph: {fileID: 11400000, guid: 3b39800efc077d04798aa0c720809018, type: 2}
