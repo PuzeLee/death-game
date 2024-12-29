@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 /// <summary>
 /// Controll the paragraphs
@@ -8,11 +9,13 @@ using TMPro;
 
 public class ParagraphController : MonoBehaviour
 {
-    public TextMeshProUGUI _displayText;
-    public TextMeshProUGUI[] _buttonText;
     public Paragraph _currentParagraph;
+    public TextMeshProUGUI _displayText;
+    public GameObject[] _buttons = new GameObject[2];
+    public TextMeshProUGUI[] _buttonText = new TextMeshProUGUI[2];
     private Dictionary<string, Paragraph> _exitDictionary = new Dictionary<string, Paragraph>();
     // [HideInInspector] public List<string> _exitsDescriptionInParagraph = new List<string>();
+    private int _buttonNum;
 
     private void Awake()
     {
@@ -27,7 +30,8 @@ public class ParagraphController : MonoBehaviour
     public void DisplayParagraphText()
     {
         UnpackDescription();    // get paragraph descriptions & display
-        UnpackExits();          // get exit descriptions & display at buttons
+        UnpackExits();          // get exit descriptions 
+        ShowButtons();          // display at buttons
     }
 
     public void UnpackDescription()
@@ -38,34 +42,46 @@ public class ParagraphController : MonoBehaviour
 
     public void UnpackExits()
     {
-        if (_currentParagraph._exits.Length == 1)
-        {
-            _buttonText[1].text = _currentParagraph._exits[0]._exitDescription;
-        }
-        else if (_currentParagraph._exits.Length == 2)
-        {
-            _buttonText[0].text = _currentParagraph._exits[0]._exitDescription;
-            _buttonText[1].text = _currentParagraph._exits[1]._exitDescription;
-        }
+        _buttonNum = _currentParagraph._exits.Length;
+        _exitDictionary.Clear();
 
-        for (int i = 0; i < _currentParagraph._exits.Length; i++)
+        for (int i = 0; i < _buttonNum; i++)
         {
+            // set button text
+            _buttonText[i].text = _currentParagraph._exits[i]._exitDescription;
+
+            // set _exitDictionary
             _exitDictionary.Add(_currentParagraph._exits[i]._exitDescription, _currentParagraph._exits[i]._moveToParagraph);
         }
     }
 
-    public void ClickButton()
+    public void ShowButtons()
     {
-        // change paragraph
-        if (_currentParagraph._exits.Length == 1)
+        if (_buttonNum == 1)
         {
-            _currentParagraph = _currentParagraph._exits[0]._moveToParagraph;
+            _buttonText[1].text = _buttonText[0].text;
+            _buttons[0].SetActive(false);
+            _buttons[1].SetActive(true);
         }
-        else if (_currentParagraph._exits.Length == 2)
+        else if (_buttonNum == 2)
         {
-            _currentParagraph = _currentParagraph._exits[0]._moveToParagraph;
+            _buttons[0].SetActive(true);
+            _buttons[1].SetActive(true);
+        }
+        else
+        {
+            _buttons[0].SetActive(false);
+            _buttons[1].SetActive(false);
+        }
+    }
 
+    public void ChangeParagraph(TextMeshProUGUI keyTMPro)
+    {
+        // compare the dictionary, and move to designated paragraph
+        if (_exitDictionary.ContainsKey(keyTMPro.text))
+        {
+            _currentParagraph = _exitDictionary[keyTMPro.text];
+            DisplayParagraphText();
         }
-        // _currentParagraph = _exitDictionary[directionNoun];
     }
 }
