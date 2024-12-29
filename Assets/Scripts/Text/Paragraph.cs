@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Paragraph Content Def
@@ -12,4 +13,6 @@ public class Paragraph : ScriptableObject
 	public string _description;
 	public string _paragraphName;
 	public Exit[] _exits;
+	public Sprite _speakerAvatar;
+	public string _speakerName;
 }

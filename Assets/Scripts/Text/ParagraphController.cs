@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using System;
 
 /// <summary>
@@ -13,13 +14,14 @@ public class ParagraphController : MonoBehaviour
     public TextMeshProUGUI _displayText;
     public GameObject[] _buttons = new GameObject[2];
     public TextMeshProUGUI[] _buttonText = new TextMeshProUGUI[2];
+    public GameObject _roleObject;
+    public Image _speakerAvatar;
+    public TextMeshProUGUI _speakerName;
     private Dictionary<string, Paragraph> _exitDictionary = new Dictionary<string, Paragraph>();
-    // [HideInInspector] public List<string> _exitsDescriptionInParagraph = new List<string>();
     private int _buttonNum;
 
     private void Awake()
     {
-
     }
 
     private void Start()
@@ -32,6 +34,7 @@ public class ParagraphController : MonoBehaviour
         UnpackDescription();    // get paragraph descriptions & display
         UnpackExits();          // get exit descriptions 
         ShowButtons();          // display at buttons
+        UnpackRole();
     }
 
     public void UnpackDescription()
@@ -72,6 +75,20 @@ public class ParagraphController : MonoBehaviour
         {
             _buttons[0].SetActive(false);
             _buttons[1].SetActive(false);
+        }
+    }
+
+    public void UnpackRole()
+    {
+        if (_currentParagraph._speakerAvatar != null && _currentParagraph._speakerName != null)
+        {
+            _speakerAvatar.sprite = _currentParagraph._speakerAvatar;
+            _speakerName.text = _currentParagraph._speakerName;
+            _roleObject.SetActive(true);
+        }
+        else
+        {
+            _roleObject.SetActive(false);
         }
     }
 
