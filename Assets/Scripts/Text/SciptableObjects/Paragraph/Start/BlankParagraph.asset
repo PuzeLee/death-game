@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7be9792f57748a4e99663f4a3f46a5a, type: 3}
   m_Name: BlankParagraph
   m_EditorClassIdentifier: 
-  _description: ~~~
+  _description: La~La~La~
   _paragraphName: BlankParagraph
   _exits: []
+  _speakerAvatar: {fileID: 21300000, guid: f230d2d71db7c21418c319e695018583, type: 3}
+  _speakerName: You

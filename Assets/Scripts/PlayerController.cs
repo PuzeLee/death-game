@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
     {
         _rb.linearVelocityY = _jumpPower;
         _animator.SetTrigger("jump");
-
     }
 
     private bool IsGrounded()

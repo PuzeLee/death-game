@@ -17,3 +17,5 @@ MonoBehaviour:
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 1d9179fe572f92541be99f96120fdd32, type: 2}
+  _speakerAvatar: {fileID: -8978650714957978138, guid: ea53041917c2a3748b38e17f33ad5214, type: 3}
+  _speakerName: Narration
