@@ -2,7 +2,24 @@
  Window Programming Final Project
 
 ## Pull / Branch
-* 
+1. Clone 一份新專案
+   * 網頁版 GitHub 複製連結
+       * ![網頁版 GitHub 複製連結](README_files/螢幕擷取畫面%202024-12-31%20005720.png)
+   * GitHub Desktop File Clone
+       * ![GitHub Desktop File Clone](README_files/螢幕擷取畫面%202024-12-31%20010001.png)
+       * ![GitHub Desktop File Clone](README_files/螢幕擷取畫面%202024-12-31%20010112.png)
+2. 新增 Branch
+   1. 用 VScode 打開專案資料夾，並開啟 Terminal
+   2. 在本地建立一個新分支並切換到該分支 `git checkout -b <branchName>`
+		* e.g. `git checkout -b Liu`
+   3. 推送本地分支到遠端並建立關聯 `git push -u origin <branchName>`
+		* e.g. `git push -u origin Liu`
+   4. 確認本地分支是否與遠端分支關聯成功
+        * git branch -vv
+        * ![git branch -vv](README_files/螢幕擷取畫面%202024-12-31%20010428.png)
+        * 看到這個畫面應該就可以了
+        * 之後就 commit / push / commit / push...
+
 
 ## 資料夾結構
 * Assets
