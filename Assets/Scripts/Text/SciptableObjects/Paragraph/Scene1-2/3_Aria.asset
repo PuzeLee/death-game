@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be9792f57748a4e99663f4a3f46a5a, type: 3}
+  m_Name: 3_Aria
+  m_EditorClassIdentifier: 
+  _description: "Hey, maybe this is some prank?\nOr a test, like one of those challenges
+    in a game?\r"
+  _paragraphName: 3_Aria
+  _exits:
+  - _exitDescription: Explore the Room
+    _moveToParagraph: {fileID: 11400000, guid: 00f35d85383e5a24ebbfbea2d3a7a693, type: 2}
+  - _exitDescription: 'Say: This isn''t normal!!!'
+    _moveToParagraph: {fileID: 11400000, guid: b479d99e3f7125d4ba553c7f7e95db3b, type: 2}
+  _speakerAvatar: {fileID: 7910260042317862207, guid: 642f6897137e17d49a0c6dc0826a18bf, type: 3}
+  _speakerName: Aria

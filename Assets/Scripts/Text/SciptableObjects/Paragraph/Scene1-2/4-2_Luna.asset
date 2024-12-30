@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be9792f57748a4e99663f4a3f46a5a, type: 3}
+  m_Name: 4-2_Luna
+  m_EditorClassIdentifier: 
+  _description: "Yeah, totally agree. \u0295\u2022\u1D25\u2022\u0294"
+  _paragraphName: 4-2_Luna
+  _exits:
+  - _exitDescription: Next
+    _moveToParagraph: {fileID: 11400000, guid: dbc5103a120c64147b13895a7a916dd8, type: 2}
+  _speakerAvatar: {fileID: 7439732885553667524, guid: 2fe864ae34dd71242be2b2023a403472, type: 3}
+  _speakerName: Luna

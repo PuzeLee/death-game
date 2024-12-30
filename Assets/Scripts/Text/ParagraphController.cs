@@ -10,19 +10,28 @@ using System;
 
 public class ParagraphController : MonoBehaviour
 {
-    public Paragraph _currentParagraph;
+	[Header("Paragraph")]
+	public Paragraph _currentParagraph;
     public TextMeshProUGUI _displayText;
     public GameObject[] _buttons = new GameObject[2];
     public TextMeshProUGUI[] _buttonText = new TextMeshProUGUI[2];
     public GameObject _roleObject;
     public Image _speakerAvatar;
     public TextMeshProUGUI _speakerName;
+
+	[Header("Audio")]
+	public AudioController _audioController;
+	
     private Dictionary<string, Paragraph> _exitDictionary = new Dictionary<string, Paragraph>();
+    private LightController _lightController;
+	private GameController _gameController;
     private int _buttonNum;
 
     private void Awake()
     {
-    }
+        _lightController = GetComponent<LightController>();
+		_gameController = GetComponent<GameController>();
+	}
 
     private void Start()
     {
@@ -98,7 +107,10 @@ public class ParagraphController : MonoBehaviour
         if (_exitDictionary.ContainsKey(keyTMPro.text))
         {
             _currentParagraph = _exitDictionary[keyTMPro.text];
-            DisplayParagraphText();
+            _lightController.ChangeLight();
+			_gameController.ClickButton(_currentParagraph._paragraphName);
+			_audioController.PlayMusic(_currentParagraph._paragraphName);
+			DisplayParagraphText();
         }
     }
 }

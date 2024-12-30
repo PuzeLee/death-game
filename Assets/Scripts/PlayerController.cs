@@ -21,8 +21,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Update()
-    {
+    private void FixedUpdate()
+
+	// private void Update()
+	{
         if (!_isDied)
         {
             // Move

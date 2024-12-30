@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-	public static SceneController instance;
+	// public static SceneController instance;
+	public SceneController instance;
 
 	private void Awake()
 	{
