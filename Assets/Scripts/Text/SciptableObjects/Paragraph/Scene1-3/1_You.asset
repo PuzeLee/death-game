@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be9792f57748a4e99663f4a3f46a5a, type: 3}
+  m_Name: 1_You
+  m_EditorClassIdentifier: 
+  _description: 'This place feels even weirder...
+
+    Why is there an open area
+    here?'
+  _paragraphName: 1_You
+  _exits:
+  - _exitDescription: Next
+    _moveToParagraph: {fileID: 11400000, guid: 49babdeac0c845c49affc6b9ee5fc204, type: 2}
+  _speakerAvatar: {fileID: -66903961333454257, guid: cc3202ac5fbbce64784faf00ef1ece42, type: 3}
+  _speakerName: You
