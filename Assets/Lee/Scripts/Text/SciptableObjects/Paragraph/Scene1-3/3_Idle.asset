@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7be9792f57748a4e99663f4a3f46a5a, type: 3}
-  m_Name: 2_Aria
+  m_Name: 3_Idle
   m_EditorClassIdentifier: 
-  _description: "Hey! Look at those lights over there!\nSomething\u2019s showing
-    up!"
-  _paragraphName: 2_Aria
+  _description: ~~~
+  _paragraphName: 3_Idle
   _exits:
   - _exitDescription: Next
-    _moveToParagraph: {fileID: 11400000, guid: cd7ea9e64f9fd924f88bf365d6c8de38, type: 2}
-  _speakerAvatar: {fileID: 7910260042317862207, guid: 642f6897137e17d49a0c6dc0826a18bf, type: 3}
-  _speakerName: Aria
+    _moveToParagraph: {fileID: 0}
+  _speakerAvatar: {fileID: -66903961333454257, guid: cc3202ac5fbbce64784faf00ef1ece42, type: 3}
+  _speakerName: You
