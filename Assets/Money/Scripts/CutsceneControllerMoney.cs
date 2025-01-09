@@ -12,7 +12,7 @@ public class CutsceneImage
     public float intervalTime; // 與下一張圖片之間間隔多久
 }
 
-public class CutsceneController : MonoBehaviour
+public class CutsceneControllerMoney : MonoBehaviour
 {
     [Header("角色物件")]
     public GameObject AAA;  // 主角
@@ -23,11 +23,11 @@ public class CutsceneController : MonoBehaviour
     [Header("攝影機")]
     public Camera mainCamera;
 
-    [Header("分鏡3：圖片清單")]
+    [Header("分鏡3:圖片清單")]
     public List<CutsceneImage> cutsceneImages; 
     // 在 Inspector 中可放入 4 張圖片，並設定各自顯示與間隔時間
 
-    [Header("分鏡5：工作人員清單")]
+    [Header("分鏡5:工作人員清單")]
     public List<Text> staffList; // 顯示在螢幕上的工作名單 (一條條出現)
 
     [Header("黑屏 & 遊戲名稱")]
@@ -75,24 +75,27 @@ public class CutsceneController : MonoBehaviour
         // AAA從左側(假設初始位置)移動到畫面中央，鏡頭跟隨；停下後向左看 -> B,C,D 依序出場
         Coroutine moveA = StartCoroutine(MoveCharacter(AAA, new Vector3(4f, AAA.transform.position.y, AAA.transform.position.z), 
                                                   moveSpeed, cameraFollow:true));
-        Debug.Log("AAA arrived");
-        // AAA到達目標點，稍微等待後再讓他面向左側(此處簡化處理)
-        yield return new WaitForSeconds(1f);
-        Coroutine moveAA = StartCoroutine(MoveCharacter(AAA, new Vector3(3.999999f, AAA.transform.position.y, AAA.transform.position.z), 
-                                                  moveSpeed, cameraFollow:true));
-        Debug.Log("Flip");
+        yield return new WaitForSeconds(2f);
 
         // 同時啟動三個角色移動
         Coroutine moveB = StartCoroutine(MoveCharacter(B, new Vector3(-1.95f, B.transform.position.y, B.transform.position.z), moveSpeed));
         Coroutine moveC = StartCoroutine(MoveCharacter(C, new Vector3(-3f, C.transform.position.y, C.transform.position.z), moveSpeed));
         Coroutine moveD = StartCoroutine(MoveCharacter(D, new Vector3(-4.07f, D.transform.position.y, D.transform.position.z), moveSpeed));
 
-        // 等待全部 Coroutine 結束
+       // AAA到達目標點，稍微等待後再讓他面向左側
         yield return moveA;
+        Debug.Log("AAA arrived");
+        yield return new WaitForSeconds(0.5f);
+        Vector3 scale = AAA.transform.localScale;
+        scale.x = -Mathf.Abs(scale.x); 
+        AAA.transform.localScale = scale;
+        Debug.Log("Flip");
+
+        // 等待全部 Coroutine 結束
         yield return moveB;
         yield return moveC;
         yield return moveD;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         Debug.Log("Three arrived");
 
         // 到此時，三位配角都已經到達指定位置
@@ -229,7 +232,7 @@ private IEnumerator MoveCharacter(GameObject character, Vector3 targetPos, float
 
         // 假設往右移 10 (或自行調整)
         float targetX = mainCamera.transform.position.x + 10f;
-        while(mainCamera.transform.position.x < targetX)
+        while(mainCamera.transform.position.x < 60f)
         {
             mainCamera.transform.position += new Vector3(cameraMoveSpeed * Time.deltaTime, 0f, 0f);
             yield return null;
