@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _description: "Wait, don\u2019t rush.\nA random door in a place like this?\nIt
     could be a trap."
-  _paragraphName: 4-6_Luna
+  _audioFileName: 4-6_Luna
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: d7834291058c3d54ea5b88b51849cf81, type: 2}

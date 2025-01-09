@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 2_Celeste
   m_EditorClassIdentifier: 
   _description: "Could this be a dream? ( \u02D8\u2022\u03C9\u2022\u02D8 )\n"
-  _paragraphName: 2_Celeste
+  _audioFileName: 2_Celeste
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 6bc94d1632841524497a3ae4193dc937, type: 2}

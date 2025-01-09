@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4-2_Luna
   m_EditorClassIdentifier: 
   _description: "Yeah, totally agree. \u0295\u2022\u1D25\u2022\u0294"
-  _paragraphName: 4-2_Luna
+  _audioFileName: 4-2_Luna
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: dbc5103a120c64147b13895a7a916dd8, type: 2}

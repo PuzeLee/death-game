@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4-8_You
   m_EditorClassIdentifier: 
   _description: So, should we open it or not?
-  _paragraphName: 4-8_You
+  _audioFileName: 4-8_You
   _exits:
   - _exitDescription: Open
     _moveToParagraph: {fileID: 11400000, guid: c58104eb8b1bb834c87179ab5477491a, type: 2}

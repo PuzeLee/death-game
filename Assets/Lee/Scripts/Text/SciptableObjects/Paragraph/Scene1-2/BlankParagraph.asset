@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlankParagraph
   m_EditorClassIdentifier: 
   _description: 
-  _paragraphName: BlankParagraph
+  _audioFileName: 
   _exits: []
   _speakerAvatar: {fileID: 0}
   _speakerName: 

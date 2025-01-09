@@ -15,7 +15,7 @@ MonoBehaviour:
   _description: 'No, this place feels seriously off.
 
     We need more clues.'
-  _paragraphName: 5-3_Luna
+  _audioFileName: 5-3_Luna
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: d81bad0d7c019494e808e0d6ff921130, type: 2}

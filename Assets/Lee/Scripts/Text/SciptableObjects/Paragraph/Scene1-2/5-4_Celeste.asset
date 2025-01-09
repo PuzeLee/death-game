@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _description: "Alright, alright\u2026 fine, I\u2019ll confess.\nI\u2019m actually
     a \"Wizard\", okay?!"
-  _paragraphName: 5-4_Celeste
+  _audioFileName: 5-4_Celeste
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 381449805ad7ecd4abf498347f5f4ac6, type: 2}

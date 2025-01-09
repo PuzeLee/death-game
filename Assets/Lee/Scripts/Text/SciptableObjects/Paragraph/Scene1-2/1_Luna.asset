@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1_Luna
   m_EditorClassIdentifier: 
   _description: "Where... is this place?\nWhy are we here??? (\u25CF\u25BC\u25CF;)\r\n"
-  _paragraphName: 1_Luna
+  _audioFileName: 1_Luna
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 0f65ff8f15cf9e74b9937d475baf27ac, type: 2}

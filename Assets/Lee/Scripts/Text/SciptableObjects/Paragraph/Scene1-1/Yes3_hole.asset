@@ -15,7 +15,7 @@ MonoBehaviour:
   _description: 'When you touch the black hole,
 
     the wonderful things will happen'
-  _paragraphName: yes3_hole
+  _audioFileName: Yes3_hole
   _exits:
   - _exitDescription: Ok
     _moveToParagraph: {fileID: 11400000, guid: f9be2ec60b80edd468efb1913eac3aca, type: 2}

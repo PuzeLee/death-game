@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _description: "A door? yayaya!\nI was starting to think we\u2019d be stuck here
     forever!"
-  _paragraphName: 4-5_Aria
+  _audioFileName: 4-5_Aria
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 2a0331e04862fea42b1e9468228b1c63, type: 2}

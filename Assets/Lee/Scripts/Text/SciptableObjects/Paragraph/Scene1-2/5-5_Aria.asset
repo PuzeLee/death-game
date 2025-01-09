@@ -15,7 +15,7 @@ MonoBehaviour:
   _description: '...
 
     No wonder you have that magic wand.'
-  _paragraphName: 5-5_Aria
+  _audioFileName: 5-5_Aria
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 422b3eda9f22fab4fb908b785e418f49, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _description: "Ugh, so boring. (--_--\\)\nFine, since you\u2019re all so cautious,
     I\u2019ll go along with it. "
-  _paragraphName: 4-3_Aria
+  _audioFileName: 4-3_Aria
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: b00253db708564441a88e8a198af9a3d, type: 2}

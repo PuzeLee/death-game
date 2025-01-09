@@ -15,7 +15,7 @@ MonoBehaviour:
   _description: 'You can use "Arrow keys" to move,
 
     use "space" to jump.'
-  _paragraphName: Start2_yes_tutorial
+  _audioFileName: Yes1_toturial
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 00761ba287069434d8e42ce401142589, type: 2}
