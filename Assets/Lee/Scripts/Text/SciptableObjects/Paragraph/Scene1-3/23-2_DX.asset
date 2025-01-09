@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be9792f57748a4e99663f4a3f46a5a, type: 3}
+  m_Name: 23-2_DX
+  m_EditorClassIdentifier: 
+  _description: You asked for it
+  _paragraphName: 23-2_DX
+  _exits:
+  - _exitDescription: Oopssss...
+    _moveToParagraph: {fileID: 11400000, guid: 29d86728fe87cc94b8341bbf272733d7, type: 2}
+  _speakerAvatar: {fileID: -8456496545683582188, guid: 6aa1c9293b2506d4e9980871dc0863d0, type: 3}
+  _speakerName: DieXian

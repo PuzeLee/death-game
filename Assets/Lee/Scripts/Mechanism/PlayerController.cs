@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-    private void Die()
+    public void Die()
     {
         _animator.SetTrigger("die");
         _isDied = true;

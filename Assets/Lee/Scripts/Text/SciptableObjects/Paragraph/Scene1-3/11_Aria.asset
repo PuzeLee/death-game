@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be9792f57748a4e99663f4a3f46a5a, type: 3}
+  m_Name: 11_Aria
+  m_EditorClassIdentifier: 
+  _description: "It\u2019s moving\u2026! Is it one of you?"
+  _paragraphName: 11_Aria
+  _exits:
+  - _exitDescription: Next
+    _moveToParagraph: {fileID: 11400000, guid: 6421a2885ed9c434eaa838c4af7fc84b, type: 2}
+  _speakerAvatar: {fileID: 7910260042317862207, guid: 642f6897137e17d49a0c6dc0826a18bf, type: 3}
+  _speakerName: Aria
