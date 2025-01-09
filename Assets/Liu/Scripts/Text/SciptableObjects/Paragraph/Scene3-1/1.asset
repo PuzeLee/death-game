@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be9792f57748a4e99663f4a3f46a5a, type: 3}
+  m_Name: 1
+  m_EditorClassIdentifier: 
+  _description: What?
+  _paragraphName: 1
+  _exits:
+  - _exitDescription: Uhhh
+    _moveToParagraph: {fileID: 11400000, guid: 8c7e24b0acf67cc46b7c977479c36f9f, type: 2}
+  _speakerAvatar: {fileID: 7439732885553667524, guid: 2fe864ae34dd71242be2b2023a403472, type: 3}
+  _speakerName: Luna
+  _sceneToLoad: 
