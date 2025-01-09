@@ -15,7 +15,7 @@ MonoBehaviour:
   _description: 'Welcome to the Death Game.
 
     Do you want to know how to play?'
-  _audioFileName: Start1_intro
+  _paragraphName: Start1_intro
   _exits:
   - _exitDescription: Yes
     _moveToParagraph: {fileID: 11400000, guid: 4d32139d1ba2ef04a9e00d6716adfe8b, type: 2}

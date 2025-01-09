@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: No1_tutorial
   m_EditorClassIdentifier: 
   _description: Ok, you can try by yourself.
-  _audioFileName: No1_tutorial
+  _paragraphName: No1_tutorial
   _exits:
   - _exitDescription: Ok
     _moveToParagraph: {fileID: 11400000, guid: f9be2ec60b80edd468efb1913eac3aca, type: 2}

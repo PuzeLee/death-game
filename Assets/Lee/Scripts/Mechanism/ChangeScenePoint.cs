@@ -4,8 +4,6 @@ public class ChangeScenePoint : MonoBehaviour
 {
 	[SerializeField] bool _goNextScene;
 	[SerializeField] string _sceneName;
-	
-	public SceneController instance;
 
 	private void OnTriggerEnter2D(Collider2D collsion)
 	{
@@ -13,11 +11,11 @@ public class ChangeScenePoint : MonoBehaviour
 		{
 			if (_goNextScene)
 			{
-				instance.NextScene();
+				SceneController._instance.NextScene();
 			}
 			else
 			{
-				instance.LoadScene(_sceneName);
+				SceneController._instance.LoadScene(_sceneName);
 			}
 		}
 	}

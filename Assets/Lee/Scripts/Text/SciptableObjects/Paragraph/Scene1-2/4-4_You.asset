@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4-4_You
   m_EditorClassIdentifier: 
   _description: "Hey, look!\nThere\u2019s a door here!"
-  _audioFileName: 4-4_You
+  _paragraphName: 4-4_You
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 8a7dea78c4fddd945bcd81dc39158a32, type: 2}

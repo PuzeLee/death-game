@@ -18,7 +18,7 @@ MonoBehaviour:
 
     "Mysterious underground
     ruins."'
-  _audioFileName: 0_Intro
+  _paragraphName: 0_Intro
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 0706f46d9287ec04caf6bd035f65d26d, type: 2}

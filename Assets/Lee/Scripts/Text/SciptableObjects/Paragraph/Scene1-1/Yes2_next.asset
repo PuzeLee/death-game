@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Yes2_next
   m_EditorClassIdentifier: 
   _description: The three beside you are your classmates
-  _audioFileName: Yes2_next
+  _paragraphName: Yes2_next
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 1d9179fe572f92541be99f96120fdd32, type: 2}

@@ -15,7 +15,7 @@ MonoBehaviour:
   _description: 'Sorry...
 
     I will create a door to leave.'
-  _audioFileName: 5-7_Celeste
+  _paragraphName: 5-7_Celeste
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: d094777747e04f34c9e628ab1d449109, type: 2}

@@ -15,7 +15,7 @@ MonoBehaviour:
   _description: 'Celeste is  "Sooo Bad!!"
 
     Can you trying to open the door?'
-  _audioFileName: 5-8_Aria
+  _paragraphName: 5-8_Aria
   _exits:
   - _exitDescription: Ok
     _moveToParagraph: {fileID: 11400000, guid: c58104eb8b1bb834c87179ab5477491a, type: 2}

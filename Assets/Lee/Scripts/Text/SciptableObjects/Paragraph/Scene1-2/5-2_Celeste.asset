@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _description: "Chill out! Maybe it\u2019s just some elaborate prank.\nStop scaring
     yourself!"
-  _audioFileName: 5-2_Celeste
+  _paragraphName: 5-2_Celeste
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 7db27088b1e0dce4ca6f139806421cfa, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _description: "Hey, maybe this is some prank?\nOr a test, like one of those challenges
     in a game?\r"
-  _audioFileName: 3_Aria
+  _paragraphName: 3_Aria
   _exits:
   - _exitDescription: Explore the Room
     _moveToParagraph: {fileID: 11400000, guid: 00f35d85383e5a24ebbfbea2d3a7a693, type: 2}

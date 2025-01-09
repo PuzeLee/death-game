@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _description: "Hmm\u2026 this door feels strange.\nIt\u2019s like\u2026 it\u2019s
     waiting for something."
-  _audioFileName: 4-7_Celeste
+  _paragraphName: 4-7_Celeste
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 114bcb989008dba4b81d06b90668f474, type: 2}

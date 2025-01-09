@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OpenTheDoor
   m_EditorClassIdentifier: 
   _description: You are tring to open the door.
-  _audioFileName: 
+  _paragraphName: OpenTheDoor
   _exits: []
   _speakerAvatar: {fileID: 0}
   _speakerName: 

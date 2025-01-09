@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _description: "Well, maybe...\nwe better snoop around a bit first, just to be safe,
     \nyou know?"
-  _audioFileName: 4-1_You_Explore
+  _paragraphName: 4-1_You_Explore
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 699932bc23d63f24cae2b8c3c25cf685, type: 2}

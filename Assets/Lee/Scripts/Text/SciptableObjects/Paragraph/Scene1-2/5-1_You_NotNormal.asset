@@ -15,7 +15,7 @@ MonoBehaviour:
   _description: 'This isn''t normal at all!
 
     What the hell is this place?'
-  _audioFileName: 5-1_You_NotNormal
+  _paragraphName: 5-1_You_NotNormal
   _exits:
   - _exitDescription: Next
     _moveToParagraph: {fileID: 11400000, guid: 30ac724236be7734f9e21f73b66e875c, type: 2}
