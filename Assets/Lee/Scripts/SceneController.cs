@@ -3,14 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-	// public static SceneController instance;
-	public SceneController instance;
+	public static SceneController _instance;
+	// public SceneController instance;
 
 	private void Awake()
 	{
-		if (instance == null)
+		if (_instance == null)
 		{
-			instance = this;
+			_instance = this;
 			DontDestroyOnLoad(gameObject);
 		}
 		else
@@ -18,6 +18,20 @@ public class SceneController : MonoBehaviour
 			Destroy(gameObject);
 		}
 	}
+
+    private void Update()
+    {
+        // 只有在 Scene1-0 (buildIndex=0) 偵測 Enter 鍵
+        if (SceneManager.GetActiveScene().buildIndex == 0
+            && Input.GetKeyDown(KeyCode.Return))
+        {
+            // 動畫載入完畢
+            if (FindFirstObjectByType<GameController_1_0>()._isLoaded)
+            {
+                NextScene();
+            }
+        }
+    }
 
     public void NextScene()
 	{
