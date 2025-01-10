@@ -21,22 +21,27 @@ public class CutsceneControllerMoney : MonoBehaviour
     public GameObject D;
 
     [Header("攝影機")]
-    public Camera mainCamera;
+    public Camera mainCamera; // 在 Inspector 拖入Hierarchy中的 Main Camera
+
+    // ★ 這裡定義一個變數來存 CameraController (可以不用 public)
+    private CameraControllerMoney cameraControllerMoney;
 
     [Header("分鏡3:圖片清單")]
     public List<CutsceneImage> cutsceneImages; 
-    // 在 Inspector 中可放入 4 張圖片，並設定各自顯示與間隔時間
+    // 在 Inspector 中可放入圖片，並設定各自顯示與間隔時間
 
     [Header("分鏡5:工作人員清單")]
     public List<Text> staffList; // 顯示在螢幕上的工作名單 (一條條出現)
 
     [Header("黑屏 & 遊戲名稱")]
-    public CanvasGroup blackScreen;     // 最後黑屏
+    public GameObject blackScreen;     // 最後黑屏
     public Text gameTitleText;         // 遊戲名稱
 
     [Header("音效 & BGM")]
     public AudioSource bgm;            // 放煙火時的柔和 BGM
     public AudioSource gunShotSFX;     // 槍聲音效
+    public AudioSource reloadSFX;
+    public AudioSource frontSFX;
 
     [Header("參數設定")]
     public float moveSpeed = 2f;       // 角色移動速度
@@ -45,7 +50,7 @@ public class CutsceneControllerMoney : MonoBehaviour
     private void Start()
     {
         // 初始化各 UI 狀態
-        if(blackScreen != null) blackScreen.alpha = 0f; // 不顯示黑屏
+        //if(blackScreen != null) blackScreen.alpha = 0f; // 不顯示黑屏
         if(gameTitleText != null) gameTitleText.enabled = false;
 
         // 分鏡 3 的圖片預設先隱藏
@@ -62,6 +67,12 @@ public class CutsceneControllerMoney : MonoBehaviour
                 txt.gameObject.SetActive(false);
         }
 
+        // ★ 取得 CameraControllerMoney
+        if (mainCamera != null)
+        {
+            cameraControllerMoney = mainCamera.GetComponent<CameraControllerMoney>();
+        }
+
         // 開始進行整個結尾動畫流程
         StartCoroutine(CutsceneFlow());
     }
@@ -71,67 +82,79 @@ public class CutsceneControllerMoney : MonoBehaviour
     /// </summary>
     private IEnumerator CutsceneFlow()
     {
+        if(frontSFX != null && !frontSFX.isPlaying)
+            frontSFX.Play();
         // == 分鏡 1 ==
-        // AAA從左側(假設初始位置)移動到畫面中央，鏡頭跟隨；停下後向左看 -> B,C,D 依序出場
-        Coroutine moveA = StartCoroutine(MoveCharacter(AAA, new Vector3(4f, AAA.transform.position.y, AAA.transform.position.z), 
-                                                  moveSpeed, cameraFollow:true));
+        // 假設：希望此時相機跟隨主角
+        if(cameraControllerMoney != null)
+            cameraControllerMoney.canFollow = true; 
+
+        // AAA 從左側移動到畫面中央
+        // (這裡我們呼叫 MoveCharacter 時，也可以選擇 cameraFollow:true or false)
+        Coroutine moveA = StartCoroutine(MoveCharacter(
+            AAA, 
+            new Vector3(4f, AAA.transform.position.y, AAA.transform.position.z), 
+            moveSpeed, 
+            cameraFollow:true
+        ));
         yield return new WaitForSeconds(2f);
 
-        // 同時啟動三個角色移動
+        // 同時啟動 B, C, D
         Coroutine moveB = StartCoroutine(MoveCharacter(B, new Vector3(-1.95f, B.transform.position.y, B.transform.position.z), moveSpeed));
-        Coroutine moveC = StartCoroutine(MoveCharacter(C, new Vector3(-3f, C.transform.position.y, C.transform.position.z), moveSpeed));
+        Coroutine moveC = StartCoroutine(MoveCharacter(C, new Vector3(-3f,    C.transform.position.y, C.transform.position.z), moveSpeed));
         Coroutine moveD = StartCoroutine(MoveCharacter(D, new Vector3(-4.07f, D.transform.position.y, D.transform.position.z), moveSpeed));
 
-       // AAA到達目標點，稍微等待後再讓他面向左側
+        // AAA抵達後，讓他面向左
         yield return moveA;
-        Debug.Log("AAA arrived");
-        yield return new WaitForSeconds(0.5f);
+        frontSFX.Stop();
         Vector3 scale = AAA.transform.localScale;
         scale.x = -Mathf.Abs(scale.x); 
         AAA.transform.localScale = scale;
-        Debug.Log("Flip");
 
-        // 等待全部 Coroutine 結束
+        // 等待 B, C, D 也都抵達
         yield return moveB;
         yield return moveC;
         yield return moveD;
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("Three arrived");
-
-        // 到此時，三位配角都已經到達指定位置
-
-
+        
 
         // == 分鏡 2 ==
-        // C 拿出手槍指向 AAA (此處用 WaitForSeconds 代表給點時間給掏槍動畫)
+        // C 拿出手槍指向 AAA
         Animator animatorB = B.GetComponent<Animator>();
         animatorB.SetBool("isGun", true);
-        yield return new WaitForSeconds(4f);
-
-        Debug.Log("2nd camera");
+        if(reloadSFX != null) reloadSFX.Play();
+        yield return new WaitForSeconds(2f);
+        if(bgm != null && !bgm.isPlaying){
+            bgm.Play();
+            Debug.Log("bgm played!");
+        }else{
+            Debug.Log("bgm not played!");
+        }
+        yield return new WaitForSeconds(2f);
 
         // == 分鏡 3 ==
-        // 依序顯示多張圖片(每張圖片都已包含藍底白字)
         yield return StartCoroutine(ShowCutsceneImages());
-        Debug.Log("3rd camera");
 
         // == 分鏡 4 ==
-        // 場景回復，四人不動，鏡頭向右移動直到看不到四人；播放煙火 & 柔和 BGM
+        // 此時我們要手動移動相機到 x=80 不被干擾，所以關掉相機跟隨
+        if(cameraControllerMoney != null)
+            cameraControllerMoney.canFollow = false;
+
         yield return StartCoroutine(MoveCameraRightAndFireworks());
         Debug.Log("4th camera");
 
         // == 分鏡 5 ==
-        // 一條一條顯示工作人員清單
-        yield return StartCoroutine(ShowStaffList());
+        //yield return StartCoroutine(ShowStaffList());
         Debug.Log("5th camera");
 
         // == 分鏡 6 ==
-        // 鏡頭繼續向右移，一段後再看到四人，此時AAA被吊起來、C持槍(自行切換動畫)
-        yield return StartCoroutine(RevealCharactersAgain());
+        // 如果此時要再度由手動移動相機或瞬移角色...
+        // 也可以再度把canFollow打開 if needed
+        // if(cameraController != null) cameraController.canFollow = true;
+        //yield return StartCoroutine(RevealCharactersAgain());
         Debug.Log("6th camera");
 
         // == 分鏡 7 ==
-        // C 開槍，播放槍聲 -> 畫面黑屏 -> 顯示遊戲名稱 -> 結束
         yield return StartCoroutine(FinalShotAndBlackout());
         Debug.Log("7th camera");
     }
@@ -139,108 +162,83 @@ public class CutsceneControllerMoney : MonoBehaviour
     #region 分鏡輔助方法
 
     /// <summary>
-    /// 角色移動到指定座標 (2D 側視)，可選擇是否攝影機跟隨。
+    /// 角色移動到指定座標 (2D 側視)，可選擇是否要局部 cameraFollow
     /// </summary>
-    /// <summary>
-/// 角色移動到指定座標 (2D 側視)，可選擇是否攝影機跟隨。
-/// 在移動時啟動跑步動畫(isRun = true)，到達後關閉(isRun = false)。
-/// </summary>
-private IEnumerator MoveCharacter(GameObject character, Vector3 targetPos, float speed, bool cameraFollow = false)
-{
-    if(character == null) yield break;
-
-    // 1. 取得角色上的 Animator
-    Animator animator = character.GetComponent<Animator>();
-    if(animator != null)
+    private IEnumerator MoveCharacter(GameObject character, Vector3 targetPos, float speed, bool cameraFollow = false)
     {
-        // 進入「跑步」狀態
-        animator.SetBool("isRun", true);
-    }
+        if(character == null) yield break;
 
-    // 2. 持續移動角色，直到抵達目標點
-    while(Vector3.Distance(character.transform.position, targetPos) > 0.1f)
-    {
-        character.transform.position = Vector3.MoveTowards(
-            character.transform.position,
-            targetPos,
-            speed * Time.deltaTime
-        );
-
-        // 如果需要攝影機跟隨，就更新攝影機 x 座標到角色所在
-        if(cameraFollow && mainCamera != null)
+        Animator animator = character.GetComponent<Animator>();
+        if(animator != null)
         {
-            mainCamera.transform.position = new Vector3(
-                character.transform.position.x,
-                mainCamera.transform.position.y,
-                mainCamera.transform.position.z
-            );
+            animator.SetBool("isRun", true);
         }
 
-        yield return null; 
+        while(Vector3.Distance(character.transform.position, targetPos) > 0.1f)
+        {
+            character.transform.position = Vector3.MoveTowards(
+                character.transform.position,
+                targetPos,
+                speed * Time.deltaTime
+            );
+
+            if(cameraFollow && mainCamera != null)
+            {
+                // 「局部」相機跟隨：直接改變 mainCamera 的 x
+                // 如果你只想靠 CameraController.canFollow 就可以把這行拿掉
+                Vector3 camPos = mainCamera.transform.position;
+                camPos.x = character.transform.position.x;
+                mainCamera.transform.position = camPos;
+            }
+
+            yield return null;
+        }
+
+        if(animator != null)
+        {
+            animator.SetBool("isRun", false);
+        }
+
+        yield return new WaitForSeconds(0.5f);
     }
-
-    // 3. 到達後，切回「待機」狀態
-    if(animator != null)
-    {
-        animator.SetBool("isRun", false);
-    }
-
-    // 移動結束後，稍微暫停片刻 (看需求是否保留)
-    yield return new WaitForSeconds(0.5f);
-}
-
 
     /// <summary>
-    /// 讓角色面向左(簡易 2D做法，可用 flipX 或動畫參數)
-    /// </summary>
-    private void FlipCharacterLeft(GameObject character)
-    {
-        // 以下只是簡單的 flipX 範例
-        SpriteRenderer sr = character.GetComponent<SpriteRenderer>();
-        if(sr != null) sr.flipX = true;
-    }
-
-    /// <summary>
-    /// 分鏡3：依序顯示圖片
+    /// 分鏡3：依序顯示多張圖片
     /// </summary>
     private IEnumerator ShowCutsceneImages()
     {
+        
         foreach(var ci in cutsceneImages)
         {
-            // 顯示圖片
             if(ci.image != null)
             {
                 ci.image.gameObject.SetActive(true);
-                // 顯示時間
                 yield return new WaitForSeconds(ci.displayTime);
-                // 隱藏
                 ci.image.gameObject.SetActive(false);
-                // 與下一張圖片的間隔
                 yield return new WaitForSeconds(ci.intervalTime);
             }
         }
     }
 
     /// <summary>
-    /// 分鏡4：鏡頭往右移，直到看不到四人；此時釋放煙火、播放BGM
+    /// 分鏡4：往右移到 x=80，放煙火 & BGM
     /// </summary>
     private IEnumerator MoveCameraRightAndFireworks()
     {
-        // 播放 BGM (如果尚未播放)
-        if(bgm != null && !bgm.isPlaying)
-            bgm.Play();
+            
 
-        // 假設往右移 10 (或自行調整)
-        float targetX = mainCamera.transform.position.x + 10f;
-        while(mainCamera.transform.position.x < 60f)
+        float targetX = 48f;
+        while(mainCamera.transform.position.x < targetX)
         {
-            mainCamera.transform.position += new Vector3(cameraMoveSpeed * Time.deltaTime, 0f, 0f);
+            Vector3 pos = mainCamera.transform.position;
+            pos.x += cameraMoveSpeed * Time.deltaTime;
+            mainCamera.transform.position = pos;
             yield return null;
         }
 
-        // 這裡可以觸發煙火特效(若有粒子特效可 Play)
+        // 假設這裡觸發煙火
         // ...
-        yield return new WaitForSeconds(2f); // 留點時間讓煙火看起來更持續
+        yield return new WaitForSeconds(2f);
     }
 
     /// <summary>
@@ -252,8 +250,6 @@ private IEnumerator MoveCharacter(GameObject character, Vector3 targetPos, float
         {
             staffList[i].gameObject.SetActive(true);
             yield return new WaitForSeconds(2f);
-
-            // 顯示完後隱藏，或可選擇保持顯示
             staffList[i].gameObject.SetActive(false);
         }
 
@@ -261,56 +257,32 @@ private IEnumerator MoveCharacter(GameObject character, Vector3 targetPos, float
     }
 
     /// <summary>
-    /// 分鏡6：鏡頭再度向右移動，直到出現AAA被吊著 & C持槍
+    /// 分鏡6：鏡頭再度向右移動，看到 AAA 被吊著…(示意)
     /// </summary>
     private IEnumerator RevealCharactersAgain()
     {
-        float targetX = mainCamera.transform.position.x + 8f;
-        while(mainCamera.transform.position.x < targetX)
-        {
-            mainCamera.transform.position += new Vector3(cameraMoveSpeed * Time.deltaTime, 0f, 0f);
-            yield return null;
-        }
+        //float targetX = mainCamera.transform.position.x + 8f;
+        //while(mainCamera.transform.position.x < targetX)
+        //{
+        //    mainCamera.transform.position += new Vector3(cameraMoveSpeed * Time.deltaTime, 0f, 0f);
+        //    yield return null;
+        //}
 
-        // 此時切換 AAA 狀態 -> 被吊著；C 持槍(可以在角色Animator觸發對應動作)
-        // ...
-
+        // AAA 被吊著 / C持槍…(自行設定Animator)
         yield return new WaitForSeconds(1f);
     }
 
     /// <summary>
-    /// 分鏡7：C開槍，黑屏淡入，顯示遊戲名稱，結束
+    /// 分鏡7：C開槍 -> 黑屏 -> 顯示遊戲名稱 -> 結束
     /// </summary>
     private IEnumerator FinalShotAndBlackout()
     {
-        // 播槍聲
-        if(gunShotSFX != null) gunShotSFX.Play();
-
-        // 稍微延遲，再開始黑屏
-        yield return new WaitForSeconds(0.5f);
-
-        // 黑屏淡入
-        float fadeDuration = 2f;
-        float timeElapsed = 0f;
-        while(timeElapsed < fadeDuration)
-        {
-            timeElapsed += Time.deltaTime;
-            if(blackScreen != null)
-                blackScreen.alpha = Mathf.Lerp(0f, 1f, timeElapsed / fadeDuration);
-
-            yield return null;
-        }
-
-        // 顯示遊戲名稱
-        if(gameTitleText != null)
-            gameTitleText.enabled = true;
-
-        // 再等個幾秒結束過場
+        bgm.Stop();
         yield return new WaitForSeconds(3f);
-
-        // 可在此結束遊戲或回主選單
-        // Application.Quit(); 
-        // 或 UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        if(gunShotSFX != null) gunShotSFX.Play();
+        blackScreen.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        // Application.Quit();
     }
 
     #endregion
