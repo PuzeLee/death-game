@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7be9792f57748a4e99663f4a3f46a5a, type: 3}
-  m_Name: 2
+  m_Name: 2-1_Aria
   m_EditorClassIdentifier: 
-  _description: '!!!'
-  _paragraphName: 2
+  _description: 'You are so BAD!!
+
+'
+  _paragraphName: 2-1_Aria
   _exits:
-  - _exitDescription: Continue
-    _moveToParagraph: {fileID: 11400000, guid: 9920640776cb6dd41a5052ce078a516a, type: 2}
-  _speakerAvatar: {fileID: -66903961333454257, guid: cc3202ac5fbbce64784faf00ef1ece42, type: 3}
-  _speakerName: ' '
+  - _exitDescription: I'm Sorry...
+    _moveToParagraph: {fileID: 11400000, guid: cdcaa633bac651c4a9306e5eaa7f5dbb, type: 2}
+  _speakerAvatar: {fileID: 7910260042317862207, guid: 642f6897137e17d49a0c6dc0826a18bf, type: 3}
+  _speakerName: Aria

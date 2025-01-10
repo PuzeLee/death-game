@@ -214,7 +214,8 @@ public class GameControllerMoney : MonoBehaviour
         else
         {
             Debug.Log("所有關卡完成！");
-        }
+			SceneController._instance.NextScene();
+		}
     }
 
     public void RestartCurrentLevel()

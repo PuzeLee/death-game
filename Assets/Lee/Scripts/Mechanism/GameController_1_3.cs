@@ -190,7 +190,7 @@ public class GameController_1_3 : MonoBehaviour
         _Celeste.SetActive(true);
         _Aria.SetActive(true);
 
-        _Luna.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+        _Celeste.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 
         StartCoroutine(DimLightToZero());
     }

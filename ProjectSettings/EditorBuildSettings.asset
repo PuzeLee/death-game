@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Lee/Scenes/Scene1-3.unity
     guid: 134edcb63c740c64c81d48b75c935db6
   - enabled: 1
+    path: Assets/Lee/Scenes/Scene1-4.unity
+    guid: 6f51679aa0ebaef49b038f106471320e
+  - enabled: 1
+    path: Assets/Money/Scenes/Scene2-1.unity
+    guid: bbaf799776af54728812ffc9612e5f5d
+  - enabled: 1
     path: Assets/Liu/Scenes/Scene3-1.unity
     guid: 3b1a4c28f2790c64b93846f036a8f8cb
   - enabled: 1
