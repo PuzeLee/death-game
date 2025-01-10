@@ -43,6 +43,11 @@ public class Scene3_2Manager : MonoBehaviour
     public Text handcuffsText;
     public bool isMagnifierUsed = false;
 
+    [Header("Dialog UI")]
+    public GameObject dialogPanel;
+    public Text dialogText;
+    public Button dialogButton;
+
     [Header("Video Clips")]
     public VideoPlayer videoPlayer;
     public VideoClip py0, py1, ps0, ps1, ey0, ey1, es0, es1;
@@ -65,9 +70,128 @@ public class Scene3_2Manager : MonoBehaviour
     public bool isEnemyHandcuffed = false;
     public bool isSawActive = false;
 
+    public string startGameText = "Game Rules:\n\n" +
+        "1. Take turns shooting at each other or yourself\n" +
+        "2. Some bullets are real, some are empty\n" +
+        "3. In Round 2, items will be introduced\n\n" +
+        "Warning: This is a death game...";
+
+    public string round2Text = "Round 2 Items:\n\n" +
+        "Magnifier: Check current bullet\n" +
+        "Cigarette: Recover 1 HP\n" +
+        "Beer: Pop current bullet and skip turn\n" +
+        "Saw: Deal 2 damage if real bullet\n" +
+        "Handcuffs: Skip opponent's next turn";
+
     public void Start()
     {
-        InitializeGame();
+        SetupButtonHoverEffects();
+        ShowDialog(startGameText, "I Agree", InitializeGame);
+    }
+
+    private void SetupButtonHoverEffects()
+    {
+        SetupButtonHover(shootEnemyButton);
+        SetupButtonHover(shootPlayerButton);
+        SetupButtonHover(magnifierButton);
+        SetupButtonHover(cigaretteButton);
+        SetupButtonHover(beerButton);
+        SetupButtonHover(sawButton);
+        SetupButtonHover(handcuffsButton);
+        SetupButtonHover(dialogButton);
+    }
+
+    private void SetupButtonHover(Button button)
+    {
+        var colors = button.colors;
+        var textComponent = button.GetComponentInChildren<Text>();
+        
+        // 設置按鈕顏色
+        colors.normalColor = new Color(1f, 1f, 1f, 1f);
+        colors.highlightedColor = new Color(1f, 0.8f, 0.8f, 1f);
+        colors.pressedColor = new Color(1f, 0.6f, 0.6f, 1f);
+        colors.selectedColor = new Color(1f, 1f, 1f, 1f);
+        colors.fadeDuration = 0.1f;
+        button.colors = colors;
+
+        if (textComponent != null)
+        {
+            // 獲取或添加 EventTrigger 組件
+            EventTrigger trigger = button.gameObject.GetComponent<EventTrigger>();
+            if (trigger == null)
+                trigger = button.gameObject.AddComponent<EventTrigger>();
+
+            // 清除既有的觸發器
+            trigger.triggers.Clear();
+
+            // 添加滑鼠進入事件
+            EventTrigger.Entry enterEntry = new EventTrigger.Entry();
+            enterEntry.eventID = EventTriggerType.PointerEnter;
+            enterEntry.callback.AddListener((data) => { textComponent.color = new Color(1f, 0f, 0f, 0.5f); });
+            trigger.triggers.Add(enterEntry);
+
+            // 添加滑鼠離開事件
+            EventTrigger.Entry exitEntry = new EventTrigger.Entry();
+            exitEntry.eventID = EventTriggerType.PointerExit;
+            exitEntry.callback.AddListener((data) => { textComponent.color = new Color(1f, 1f, 1f, 1f); });
+            trigger.triggers.Add(exitEntry);
+
+            // 添加按下事件
+            EventTrigger.Entry downEntry = new EventTrigger.Entry();
+            downEntry.eventID = EventTriggerType.PointerDown;
+            downEntry.callback.AddListener((data) => { textComponent.color = new Color(1f, 0f, 0f, 1f); });
+            trigger.triggers.Add(downEntry);
+
+            // 添加放開事件
+            EventTrigger.Entry upEntry = new EventTrigger.Entry();
+            upEntry.eventID = EventTriggerType.PointerUp;
+            upEntry.callback.AddListener((data) => { textComponent.color = new Color(1f, 1f, 1f, 1f); });
+            trigger.triggers.Add(upEntry);
+        }
+    }
+
+    private void ShowDialog(string message, string buttonText, System.Action onClose)
+    {
+        // 隐藏所有其他UI元素
+        SetAllUIElementsVisible(false);
+        SetAllItemUIElements(false);
+        
+        // 显示对话框
+        dialogPanel.SetActive(true);
+        dialogText.text = message;
+        dialogButton.GetComponentInChildren<Text>().text = buttonText;
+        
+        dialogButton.onClick.RemoveAllListeners();
+        dialogButton.onClick.AddListener(() => {
+            dialogPanel.SetActive(false);
+            onClose?.Invoke();
+            // 如果不在处理中，则显示UI元素
+            if (!isProcessing && isPlayerTurn)
+            {
+                SetAllUIElementsVisible(true);
+            }
+        });
+    }
+
+    private void SetAllUIElementsVisible(bool visible)
+    {
+        bulletCountText.gameObject.SetActive(visible);
+        playerHealthText.gameObject.SetActive(visible);
+        enemyHealthText.gameObject.SetActive(visible);
+        statusText.gameObject.SetActive(visible);
+        bulletStatusText.gameObject.SetActive(visible);
+        shootEnemyButton.gameObject.SetActive(visible);
+        shootPlayerButton.gameObject.SetActive(visible);
+        
+        // 如果在第二回合且不是在顯示對話框時，才處理道具的顯示
+        if (currentRound == 2 && visible && !dialogPanel.activeSelf)
+        {
+            UpdateItemUI();
+        }
+        else
+        {
+            SetAllItemUIElements(false);
+        }
     }
 
     public void InitializeGame()
@@ -107,15 +231,39 @@ public class Scene3_2Manager : MonoBehaviour
         shootEnemyButton.onClick.AddListener(() => OnPlayerShoot(true));
         shootPlayerButton.onClick.AddListener(() => OnPlayerShoot(false));
 
+        SetAllItemUIElements(false);
+
         if (round == 2)
         {
             playerItems.Clear();
             enemyItems.Clear();
             DistributeItems();
+            ShowDialog(round2Text, "I Understand", () => {
+                GenerateBullets();
+                StartCoroutine(ShowSequentialMessages(round));
+            });
         }
-        
-        GenerateBullets();
-        StartCoroutine(ShowSequentialMessages(round));
+        else
+        {
+            GenerateBullets();
+            StartCoroutine(ShowSequentialMessages(round));
+        }
+    }
+
+    private void SetAllItemUIElements(bool visible)
+    {
+        // 設置所有道具相關UI為指定狀態
+        magnifierButton.gameObject.SetActive(false);
+        cigaretteButton.gameObject.SetActive(false);
+        beerButton.gameObject.SetActive(false);
+        sawButton.gameObject.SetActive(false);
+        handcuffsButton.gameObject.SetActive(false);
+
+        magnifierText.gameObject.SetActive(false);
+        cigaretteText.gameObject.SetActive(false);
+        beerText.gameObject.SetActive(false);
+        sawText.gameObject.SetActive(false);
+        handcuffsText.gameObject.SetActive(false);
     }
 
     public IEnumerator ShowSequentialMessages(int round)
@@ -208,6 +356,14 @@ public class Scene3_2Manager : MonoBehaviour
 
     public void UpdateItemUI()
     {
+        // 清除之前的所有監聽器
+        magnifierButton.onClick.RemoveAllListeners();
+        cigaretteButton.onClick.RemoveAllListeners();
+        beerButton.onClick.RemoveAllListeners();
+        sawButton.onClick.RemoveAllListeners();
+        handcuffsButton.onClick.RemoveAllListeners();
+
+        // 更新按鈕和文字的顯示狀態
         magnifierButton.gameObject.SetActive(playerItems.Contains(ItemType.Magnifier));
         cigaretteButton.gameObject.SetActive(playerItems.Contains(ItemType.Cigarette));
         beerButton.gameObject.SetActive(playerItems.Contains(ItemType.Beer));
@@ -219,14 +375,8 @@ public class Scene3_2Manager : MonoBehaviour
         beerText.gameObject.SetActive(enemyItems.Contains(ItemType.Beer));
         sawText.gameObject.SetActive(enemyItems.Contains(ItemType.Saw));
         handcuffsText.gameObject.SetActive(enemyItems.Contains(ItemType.Handcuffs));
-        
-        // Setup click events for player buttons
-        magnifierButton.onClick.RemoveAllListeners();
-        cigaretteButton.onClick.RemoveAllListeners();
-        beerButton.onClick.RemoveAllListeners();
-        sawButton.onClick.RemoveAllListeners();
-        handcuffsButton.onClick.RemoveAllListeners();
 
+        // 重新添加按鈕監聽器
         magnifierButton.onClick.AddListener(() => StartCoroutine(UseItem(ItemType.Magnifier, true)));
         cigaretteButton.onClick.AddListener(() => StartCoroutine(UseItem(ItemType.Cigarette, true)));
         beerButton.onClick.AddListener(() => StartCoroutine(UseItem(ItemType.Beer, true)));
@@ -274,8 +424,20 @@ public class Scene3_2Manager : MonoBehaviour
 
     public void UpdateUI()
     {
-        playerHealthText.text = $"Player HP: {playerHealth}";
-        enemyHealthText.text = $"Enemy HP: {enemyHealth}";
+        string playerHealthStr = "";
+        string enemyHealthStr = "";
+        
+        for(int i = 0; i < playerHealth; i++)
+        {
+            playerHealthStr += "♥";
+        }
+        for(int i = 0; i < enemyHealth; i++)
+        {
+            enemyHealthStr += "♥";
+        }
+        
+        playerHealthText.text = $"You: {playerHealthStr}";
+        enemyHealthText.text = $"Luna: {enemyHealthStr}";
     }
 
     public void OnPlayerShoot(bool targetIsEnemy)
@@ -535,7 +697,7 @@ public class Scene3_2Manager : MonoBehaviour
                 return bulletList.Count > 0 && bulletList[0] && isMagnifierUsed;
 
             case ItemType.Handcuffs:
-                return Random.value < 0.3f;
+                return Random.value < 0.2f;
 
             case ItemType.Beer:
                 return Random.value < 0f;
@@ -548,6 +710,12 @@ public class Scene3_2Manager : MonoBehaviour
 
     public bool DecideEnemyTarget()
     {
+        if (isMagnifierUsed && bulletList.Count > 0)
+        {
+            bool isRealBullet = bulletList[0];
+            return !isRealBullet; // 如果是實彈射擊玩家(return false)，虛彈射擊自己(return true)
+        }
+
         int emptyCount = bulletList.FindAll(b => !b).Count;
         int realCount = bulletList.FindAll(b => b).Count;
 
