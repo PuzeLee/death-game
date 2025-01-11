@@ -1,4 +1,5 @@
 # Death Game
+* [GitHub 連結](https://github.com/PuzeLee/death-game)
 * [Demo 影片連結](https://www.youtube.com/watch?v=QkwtMe3pX7M)
 * [Canva 簡報連結](https://www.canva.com/design/DAGbvyfn5nc/2svSkbdcWSwOuOL67Fej8g/view?utm_content=DAGbvyfn5nc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h9661b54a4a)
 * [HackMD 連結](https://hackmd.io/skaxwQOZRS20dLIAM-rJog?view)
