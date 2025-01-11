@@ -81,3 +81,7 @@
   * 網路素材：惡魔輪盤遊戲畫面
   * 生成式 AI 合成
     * [Hailuo AI](https://hailuoai.video/)
+
+## 協作者名單
+* [12yuuuu](https://github.com/12yuuuu)
+* [matt930415](https://github.com/matt930415)
