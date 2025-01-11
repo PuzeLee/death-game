@@ -502,7 +502,7 @@ public class Scene3_2Manager : MonoBehaviour
             else 
                 playerHealth -= damage;
             
-           isSawActive = false;
+            isSawActive = false;
             
             if (wasPlayerTurn)
             {
@@ -574,7 +574,15 @@ public class Scene3_2Manager : MonoBehaviour
                 StartCoroutine(EndRoundOne());
             else
             {
-                StartCoroutine(ShowGameMessage("Game Over"));
+                // StartCoroutine(ShowGameMessage("Game Over"));
+				if (playerHealth == 0)
+				{
+					SceneController._instance.LoadScene("Scene3-1");
+				}
+				else if (enemyHealth == 0)
+				{
+					SceneController._instance.NextScene();
+				}
             }
             
             return;

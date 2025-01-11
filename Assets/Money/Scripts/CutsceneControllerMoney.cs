@@ -283,6 +283,7 @@ public class CutsceneControllerMoney : MonoBehaviour
         blackScreen.SetActive(true);
         yield return new WaitForSeconds(3f);
         // Application.Quit();
+		SceneController._instance.LoadScene("Scene1-0");
     }
 
     #endregion
