@@ -11,6 +11,7 @@
 ## 專案使用說明
 * `/DeathGame`：此資料夾為 Windows 版本的執行檔，打開可直接遊玩
 * 若想以 Unity 開啟遊戲專案：
+  * Unity Version: Unity 6 (6000.0.28f1) `LTS`
   * 請先打開 `/Assets/Lee/Scenes/Scene1-0`，此為開頭畫面
   * 將執行畫面設為 Full HD (1920x1080)
 
